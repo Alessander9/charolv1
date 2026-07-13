@@ -102,8 +102,63 @@ function Hero(){
 }
 function Marquee(){const w=['Karaoke','Brasas','Piqueos','Tragos','Shows','Celebraciones'];return <div className="marquee" aria-label="Karaoke, brasas, piqueos, tragos, shows y celebraciones"><div className="marquee-track" aria-hidden="true">{[...w,...w].map((x,i)=><span key={i}>{x}<b>✦</b></span>)}</div></div>}
 function Experience(){return <section id="experiencia" className="experience section"><div className="wrap"><div className="section-head reveal"><Eyebrow dark>La experiencia Charol</Eyebrow><h2>Una noche.<br/><em>Tres razones</em> para volver.</h2><p>Del primer plato a la última canción, todo sucede en un mismo lugar.</p></div><div className="experience-grid">{experiences.map(([n,l,t,c,img])=><article className="experience-card reveal" key={n}><div className="experience-image"><img src={img} alt={`Imagen referencial: ${t}`} loading="lazy" decoding="async"/><span>{n}</span></div><div className="experience-copy"><small>{l}</small><h3>{t}</h3><p>{c}</p><a href={`${WA}?text=${encodeURIComponent(`Hola Charol, quiero consultar sobre ${t}.`)}`} target="_blank" rel="noreferrer" aria-label={`Consultar sobre ${t}`}><Icon name="arrow"/></a></div></article>)}</div></div></section>}
-function Event(){return <section id="eventos" className="event section"><div className="event-image parallax"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1800&q=90" alt="Show musical con luces rojas"/></div><div className="event-overlay"/><div className="wrap event-content reveal"><Eyebrow>Próximamente</Eyebrow><div className="event-title"><span className="event-date">Agenda<br/>en preparación</span><h2>La próxima<br/><em>noche es tuya.</em></h2></div><div className="event-meta"><p>Shows tributo, noches de rock, música criolla y artistas invitados. Conoce la próxima fecha en nuestras redes.</p><Button kind="outline" href="https://www.instagram.com/charol_karaoke_restobar/">Ver agenda en Instagram</Button></div></div></section>}
-function Celebrations(){return <section id="celebraciones" className="celebrations section"><div className="celebrations-media reveal"><img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1500&q=88" alt="Imagen referencial de amigos celebrando" loading="lazy" decoding="async"/><span className="round-stamp">TU NOCHE · TU ESCENARIO ·</span></div><div className="celebrations-copy reveal"><Eyebrow dark>Celebra en Charol</Eyebrow><h2>Tu grupo pone el motivo.<br/><em>Nosotros el escenario.</em></h2><p>Cuéntanos qué estás celebrando y armamos una experiencia para tu grupo. Condiciones y disponibilidad se confirman por reserva.</p><div className="occasion-list">{['Cumpleaños','Aniversarios','Reencuentros','Eventos privados'].map((x,i)=><div key={x}><span>0{i+1}</span>{x}<Icon name="arrow"/></div>)}</div><a className="button button-dark" href="#reserva">Cotizar celebración <Icon name="arrow"/></a></div></section>}
+function Event(){return (
+  <section id="eventos" className="event section">
+    <div className="event-image parallax">
+      <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1800&q=90" alt="Show musical con luces rojas"/>
+    </div>
+    <div className="event-overlay"/>
+    <div className="wrap event-content reveal">
+      <Eyebrow>Próximamente</Eyebrow>
+      <div className="event-title"><span className="event-date">Agenda<br/>en preparación</span></div>
+      <h2>La próxima<br/><em>noche es tuya.</em></h2>
+      <p>Shows tributo, noches de rock, música criolla y artistas invitados. Conoce la próxima fecha en nuestras redes.</p>
+      <Button kind="outline" href="https://www.instagram.com/charol_karaoke_restobar/">Ver más</Button>
+    </div>
+  </section>
+);}
+function Celebrations(){
+  const defaultImg = 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1500&q=88';
+  const items = [
+    {label:'Cumpleaños', text:'Celebra tu día con escenario propio, karaoke y la mejor comida. Armamos un ambiente que tu grupo va a recordar.', img:'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1500&q=88'},
+    {label:'Aniversarios', text:'Una noche especial merece un lugar a la altura. Cena, música y un brindis que marque la fecha.', img:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1500&q=88'},
+    {label:'Reencuentros', text:'Junta al grupo después de mucho tiempo. Brasas, tragos y karaoke para ponerse al día como se debe.', img:'https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=1500&q=88'},
+    {label:'Eventos privados', text:'Coordina con nuestro equipo para eventos corporativos, lanzamientos o reuniones que necesiten un toque distinto.', img:'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1500&q=88'}
+  ];
+  const [openIndex, setOpenIndex] = useState(null);
+  const toggle = i => setOpenIndex(prev => prev === i ? null : i);
+  const activeImg = openIndex !== null ? items[openIndex].img : defaultImg;
+  return (
+    <section id="celebraciones" className="celebrations section">
+      <div className="celebrations-media reveal">
+        <img src={activeImg} alt="Imagen referencial de celebración" loading="lazy" decoding="async"/>
+        <span className="round-stamp">TU NOCHE · TU ESCENARIO ·</span>
+      </div>
+      <div className="celebrations-copy reveal">
+        <Eyebrow dark>Celebra en Charol</Eyebrow>
+        <h2>Tu grupo pone el motivo.<br/><em>Nosotros el escenario.</em></h2>
+        <p>Cuéntanos qué estás celebrando y armamos una experiencia para tu grupo. Condiciones y disponibilidad se confirman por reserva.</p>
+        <div className="occasion-list">
+          {items.map((item,i)=>(
+            <button key={item.label} className={`occasion-item ${openIndex === i ? 'open' : ''}`} onClick={() => toggle(i)}>
+              <div className="occasion-header">
+                <span className="occasion-num">0{i+1}</span>
+                <span className="occasion-label">{item.label}</span>
+                <Icon name="arrow"/>
+              </div>
+              {openIndex === i && (
+                <div className="occasion-details">
+                  <p>{item.text}</p>
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
+        <a className="button button-dark" href="#reserva">Cotizar celebración <Icon name="arrow"/></a>
+      </div>
+    </section>
+  );
+};
 function Menu(){return <section id="carta" className="menu-section section"><div className="wrap"><div className="section-head menu-head reveal"><Eyebrow>De la cocina a la canción</Eyebrow><h2>Cena primero.<br/><em>Canta después.</em></h2><p>Categorías referenciales de la experiencia Charol. Consulta la carta y precios vigentes por WhatsApp.</p></div><div className="menu-grid">{menu.map(([name,type,img],i)=><article className="menu-card reveal" key={name}><div><span>0{i+1}</span><small>{type}</small></div><img src={img} alt={`Imagen referencial: ${name}`} loading="lazy" decoding="async"/><h3>{name}</h3></article>)}</div><div className="menu-cta reveal"><span>¿Quieres ver precios y disponibilidad?</span><a href={`${WA}?text=Hola%20Charol,%20¿me%20comparten%20la%20carta%20vigente?`} target="_blank" rel="noreferrer">Solicitar carta vigente <Icon name="arrow"/></a></div></div></section>}
 function Gallery(){return <section className="gallery-section" aria-label="Galería de ambiente referencial"><div className="gallery-intro"><Eyebrow dark>Inspiración visual</Eyebrow><h2>Una noche<br/>para <em>recordar.</em></h2><small>Imágenes referenciales. Próximamente, galería oficial de CHAROL.</small></div><div className="gallery-viewport"><div className="gallery-track">{gallery.map(([img,t],i)=><figure key={t}><img src={img} alt={`Imagen referencial: ${t}`} loading="lazy" decoding="async"/><figcaption><span>0{i+1}</span>{t}</figcaption></figure>)}</div></div></section>}
 function Reservation(){function submit(event){event.preventDefault();const data=new FormData(event.currentTarget);const message=[
