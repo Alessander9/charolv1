@@ -520,7 +520,8 @@ main {
 
 .event {
     position: relative;
-    min-height: 980px;
+    min-height: 600px;
+    padding: 80px 0;
     display: flex;
     align-items: center;
     isolation: isolate;
@@ -603,12 +604,15 @@ main {
     position: relative;
     height: 100%;
     min-height: 850px;
-    overflow: hidden
+    overflow: visible;
+    z-index: 2
 }
 
 .celebrations-media img {
     height: 100%;
-    object-fit: cover
+    width: 100%;
+    object-fit: cover;
+    display: block
 }
 
 .round-stamp {
@@ -726,15 +730,22 @@ main {
     color: var(--gold)
 }
 
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px
+.menu-carousel {
+    overflow: hidden;
+    margin: 0 -24px;
+    padding: 0 24px;
+}
+
+.menu-track {
+    display: flex;
+    width: max-content;
+    gap: 14px;
 }
 
 .menu-card {
     position: relative;
-    min-width: 0
+    width: clamp(260px, 22vw, 305px);
+    flex-shrink: 0;
 }
 
 .menu-card>div {
@@ -768,13 +779,14 @@ main {
 }
 
 .menu-cta {
+    color: red;
     margin-top: 65px;
     padding: 25px 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    font-size: .8rem
+    font-size: 2.8rem;
 }
 
 .menu-cta>span {
@@ -1265,7 +1277,8 @@ main {
     }
 
     .event {
-        min-height: 850px
+        min-height: 500px;
+        padding: 60px 0
     }
 
     .event-title {
@@ -1440,6 +1453,74 @@ textarea:focus-visible {
     color: rgba(10, 9, 9, .58);
     font-size: .7rem;
     line-height: 1.5
+}
+
+.pedidos {
+    background: #e8d0bd;
+    color: var(--red);
+}
+
+.pedidos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 25px;
+}
+
+.pedidos-header h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0;
+    color: var(--red);
+    letter-spacing: -0.02em;
+}
+
+.pedidos-bird {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.pedidos-bird img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.pedidos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.pedidos-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--red);
+    color: var(--red);
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    gap: 15px;
+}
+
+.pedidos-card:hover {
+    background: var(--red);
+    color: #e8d0bd;
+}
+
+@media(max-width: 760px) {
+    .pedidos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .reservation {
