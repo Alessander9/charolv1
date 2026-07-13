@@ -179,7 +179,196 @@ function Reservation() {
   }
   return <section id="reserva" className="reservation section"><div className="wrap reservation-layout"><div className="reservation-copy reveal"><Eyebrow>Reserva tu noche</Eyebrow><h2>De la idea<br />al <em>escenario.</em></h2><p>Completa los datos y enviaremos tu solicitud por WhatsApp. La reserva queda confirmada cuando el equipo de CHAROL responda.</p><div><strong>Contacto directo</strong><a href="tel:+51919736348"><Icon name="phone" />919 736 348</a></div></div><form className="reservation-form reveal" onSubmit={submit}><label>Nombre completo<input name="name" autoComplete="name" required placeholder="¿Cómo te llamas?" /></label><label>Teléfono<input name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="999 999 999" /></label><div className="form-row"><label>Fecha<input name="date" type="date" required /></label><label>Hora<input name="time" type="time" required /></label></div><div className="form-row"><label>Número de personas<input name="people" type="number" min="1" max="100" required placeholder="8" /></label><label>Motivo<select name="occasion" required defaultValue=""><option value="" disabled>Seleccionar</option><option>Cumpleaños</option><option>Reunión de amigos</option><option>Aniversario</option><option>Evento corporativo</option><option>Otro</option></select></label></div><label>Comentarios<textarea name="comments" rows="3" placeholder="Cuéntanos qué necesitas" /></label><label className="consent"><input type="checkbox" required />Acepto enviar estos datos por WhatsApp para gestionar mi solicitud.</label><button className="button button-red" type="submit">Continuar en WhatsApp <Icon name="whatsapp" /></button></form></div></section>
 }
-function Location() { return <section id="ubicacion" className="location section"><div className="location-map"><div className="map-grid" /><span className="map-pin"><Icon name="pin" size={30} /></span><span className="map-road road-one">Av. Antúnez de Mayolo</span><span className="map-road road-two">Los Olivos</span></div><div className="location-copy reveal"><Eyebrow>Encuéntranos</Eyebrow><h2>La noche empieza<br />en <em>Los Olivos.</em></h2><div className="address"><Icon name="pin" /><div><small>Dirección reportada</small><strong>Av. Santiago Antúnez de Mayolo 1107<br />Los Olivos, Lima</strong><span>Confirma el ingreso exacto al reservar.</span></div></div><div className="location-actions"><Button href="https://www.google.com/maps/search/?api=1&query=Av.+Santiago+Antunez+de+Mayolo+1107+Los+Olivos">Cómo llegar</Button><a className="phone-link" href="tel:+51919736348"><Icon name="phone" />919 736 348</a></div></div></section> }
-function Footer() { return <footer className="footer"><div className="footer-cta reveal"><p>Tu próxima celebración merece escenario.</p><h2>Reserva tu noche<br /><em>en Charol.</em></h2><a href={WA} target="_blank" rel="noreferrer" className="footer-circle"><Icon name="whatsapp" size={30} /><span>Reservar<br />ahora</span></a></div><div className="footer-bottom"><div className="brand"><Brand /><small>Karaoke Restobar</small></div><nav><a href="#experiencia">Experiencia</a><a href="#eventos">Eventos</a><a href="#carta">Carta</a><a href="#ubicacion">Ubicación</a></nav><div className="social"><a href="https://www.instagram.com/charol_karaoke_restobar/" target="_blank" rel="noreferrer"><Icon name="instagram" />Instagram</a><a href="tel:+51919736348"><Icon name="phone" />919 736 348</a></div><small>© 2026 CHAROL · LOS OLIVOS</small></div></footer> }
 
-export default function App() { const root = useRef(null); useLayoutEffect(() => { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined; const ctx = gsap.context(() => { gsap.from('.navbar', { y: -100, opacity: 0, duration: 1, ease: 'power4.out' }); gsap.from('.hero-title span', { yPercent: 120, rotate: 3, stagger: .12, duration: 1.2, ease: 'power4.out', delay: .15 }); gsap.from('.hero .eyebrow,.hero-lower', { y: 35, opacity: 0, stagger: .18, duration: .9, ease: 'power3.out', delay: .65 }); gsap.to('.hero-content', { yPercent: 18, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } }); gsap.utils.toArray('.parallax').forEach(el => gsap.to(el, { yPercent: 12, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } })); gsap.utils.toArray('.reveal').forEach(el => gsap.from(el, { y: 70, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%', toggleActions: 'play none none reverse' } })); gsap.to('.marquee-track', { xPercent: -50, duration: 24, repeat: -1, ease: 'none' }); gsap.to('.menu-track', { xPercent: -50, duration: 45, repeat: -1, ease: 'none' }); gsap.to('.round-stamp', { rotation: 360, duration: 18, repeat: -1, ease: 'none' }); const media = gsap.matchMedia(); media.add('(min-width: 769px)', () => { const track = document.querySelector('.gallery-track'); if (!track) return undefined; const tween = gsap.to(track, { x: () => Math.min(0, -(track.scrollWidth - window.innerWidth + 80)), ease: 'none', scrollTrigger: { trigger: '.gallery-section', start: 'top top', end: () => `+=${Math.max(track.scrollWidth, window.innerWidth)}`, scrub: 1, pin: true, invalidateOnRefresh: true } }); return () => tween.kill() }); const images = gsap.utils.toArray('img'); const refresh = () => ScrollTrigger.refresh(); images.forEach(image => { if (!image.complete) image.addEventListener('load', refresh, { once: true }) }); return () => { images.forEach(image => image.removeEventListener('load', refresh)); media.revert() } }, root); return () => ctx.revert() }, []); return <main ref={root}><Navbar /><Hero /><Marquee /><Menu /><Experience /><Event /><Celebrations /><Gallery /><Location /><Footer /><a className="whatsapp-float" href={WA} target="_blank" rel="noreferrer" aria-label="Reservar por WhatsApp"><Icon name="whatsapp" size={25} /><span>Reserva aquí</span></a></main> }
+const Tarjeta = ({ titulo, colorFondoHover, colorTextoHover, efecto }) => {
+  return (
+    <div
+      className={`pedidos-card tarjeta ${efecto}`}
+      style={{ 
+        '--color-hover-fondo': colorFondoHover,
+        '--color-hover-texto': colorTextoHover
+  }}    >
+      <h3 className='letter'>{titulo}</h3>
+      <Icon name="phone" size={40} />
+    </div>
+  );
+};
+function Pedidos() {
+  return (
+    <section id="pedidos" className="pedidos section">
+      <div className="wrap pedidos-wrap">
+        <div className="pedidos-header">
+          <h2>
+            Pide por
+            <br />
+            donde prefieras.
+          </h2>
+
+          <div className="pedidos-bird">
+            <img
+              src="https://api.dicebear.com/9.x/avataaars/svg?seed=Felix"
+              alt="Mascota"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+
+        <div className="pedidos-grid">
+         <Tarjeta 
+        titulo="Web" 
+        efecto="hover-zoom" 
+        colorFondoHover="#ff9999" 
+        colorTextoHover="white" 
+      />
+      <Tarjeta 
+        titulo="Teléfono" 
+        efecto="hover-rotate" 
+        colorFondoHover="#99ff99" 
+        colorTextoHover="black" 
+      />
+      <Tarjeta 
+        titulo="WhatsApp" 
+        efecto="hover-lift" 
+        colorFondoHover="#99ccff" 
+        colorTextoHover="white" 
+      />
+      <Tarjeta 
+        titulo="Rappi" 
+        efecto="hover-rotate" 
+        colorFondoHover="#99ccff" 
+        colorTextoHover="white" 
+      />
+        </div>
+      </div>
+    </section>
+  );
+}
+function Location() {
+  return (
+    <section id="ubicacion" className="location section">
+      <div className="location-map">
+        <div className="map-grid" />
+
+        <span className="map-pin">
+          <Icon name="pin" size={30} />
+        </span>
+
+        <span className="map-road road-one">
+          Av. Antúnez de Mayolo
+        </span>
+
+        <span className="map-road road-two">
+          Los Olivos
+        </span>
+      </div>
+
+      <div className="location-copy reveal">
+        <Eyebrow>Encuéntranos</Eyebrow>
+
+        <h2>
+          La noche empieza
+          <br />
+          en <em>Los Olivos.</em>
+        </h2>
+
+        <div className="address">
+          <Icon name="pin" />
+
+          <div>
+            <small>Dirección reportada</small>
+
+            <strong>
+              Av. Santiago Antúnez de Mayolo 1107
+              <br />
+              Los Olivos, Lima
+            </strong>
+
+            <span>
+              Confirma el ingreso exacto al reservar.
+            </span>
+          </div>
+        </div>
+
+        <div className="location-actions">
+          <Button href="https://www.google.com/maps/search/?api=1&query=Av.+Santiago+Antunez+de+Mayolo+1107+Los+Olivos">
+            Cómo llegar
+          </Button>
+
+          <a
+            className="phone-link"
+            href="tel:+51919736348"
+          >
+            <Icon name="phone" />
+            919 736 348
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-cta reveal">
+        <p>Tu próxima celebración merece escenario.</p>
+
+        <h2>
+          Reserva tu noche
+          <br />
+          <em>en Charol.</em>
+        </h2>
+
+        <a
+          href={WA}
+          target="_blank"
+          rel="noreferrer"
+          className="footer-circle"
+        >
+          <Icon name="whatsapp" size={30} />
+
+          <span>
+            Reservar
+            <br />
+            ahora
+          </span>
+        </a>
+      </div>
+
+      <div className="footer-bottom">
+        <div className="brand">
+          <Brand />
+          <small>Karaoke Restobar</small>
+        </div>
+
+        <nav>
+          <a href="#experiencia">Experiencia</a>
+          <a href="#eventos">Eventos</a>
+          <a href="#carta">Carta</a>
+          <a href="#ubicacion">Ubicación</a>
+        </nav>
+
+        <div className="social">
+          <a
+            href="https://www.instagram.com/charol_karaoke_restobar/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Icon name="instagram" />
+            Instagram
+          </a>
+
+          <a href="tel:+51919736348">
+            <Icon name="phone" />
+            919 736 348
+          </a>
+        </div>
+
+        <small>© 2026 CHAROL · LOS OLIVOS</small>
+      </div>
+    </footer>
+  );
+}
+
+export default function App() { const root = useRef(null); useLayoutEffect(() => { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined; const ctx = gsap.context(() => { gsap.from('.navbar', { y: -100, opacity: 0, duration: 1, ease: 'power4.out' }); gsap.from('.hero-title span', { yPercent: 120, rotate: 3, stagger: .12, duration: 1.2, ease: 'power4.out', delay: .15 }); gsap.from('.hero .eyebrow,.hero-lower', { y: 35, opacity: 0, stagger: .18, duration: .9, ease: 'power3.out', delay: .65 }); gsap.to('.hero-content', { yPercent: 18, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } }); gsap.utils.toArray('.parallax').forEach(el => gsap.to(el, { yPercent: 12, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } })); gsap.utils.toArray('.reveal').forEach(el => gsap.from(el, { y: 70, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%', toggleActions: 'play none none reverse' } })); gsap.to('.marquee-track', { xPercent: -50, duration: 24, repeat: -1, ease: 'none' }); gsap.to('.menu-track', { xPercent: -50, duration: 45, repeat: -1, ease: 'none' }); gsap.to('.round-stamp', { rotation: 360, duration: 18, repeat: -1, ease: 'none' }); const media = gsap.matchMedia(); media.add('(min-width: 769px)', () => { const track = document.querySelector('.gallery-track'); if (!track) return undefined; const tween = gsap.to(track, { x: () => Math.min(0, -(track.scrollWidth - window.innerWidth + 80)), ease: 'none', scrollTrigger: { trigger: '.gallery-section', start: 'top top', end: () => `+=${Math.max(track.scrollWidth, window.innerWidth)}`, scrub: 1, pin: true, invalidateOnRefresh: true } }); return () => tween.kill() }); const images = gsap.utils.toArray('img'); const refresh = () => ScrollTrigger.refresh(); images.forEach(image => { if (!image.complete) image.addEventListener('load', refresh, { once: true }) }); return () => { images.forEach(image => image.removeEventListener('load', refresh)); media.revert() } }, root); return () => ctx.revert() }, []); return <main ref={root}><Navbar /><Hero /><Marquee /><Menu /><Pedidos /><Experience /><Event /><Celebrations /><Gallery /><Location /><Footer /><a className="whatsapp-float" href={WA} target="_blank" rel="noreferrer" aria-label="Reservar por WhatsApp"><Icon name="whatsapp" size={25} /><span>Reserva aquí</span></a></main> }

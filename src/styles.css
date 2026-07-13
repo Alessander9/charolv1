@@ -45,6 +45,11 @@ main {
     overflow: clip
 }
 
+.letter {
+    font-family: 'Oswald', sans-serif;
+
+}
+
 .wrap {
     width: min(var(--wrap), calc(100% - 48px));
     margin: auto
@@ -787,6 +792,7 @@ main {
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     font-size: 2.8rem;
+    font-family: 'Oswald', sans-serif;
 }
 
 .menu-cta>span {
@@ -953,6 +959,8 @@ main {
 .address span {
     display: block
 }
+
+
 
 .address small {
     margin-bottom: 8px;
@@ -1456,7 +1464,7 @@ textarea:focus-visible {
 }
 
 .pedidos {
-    background: #e8d0bd;
+    background: #ffe5c9;
     color: var(--red);
 }
 
@@ -1468,7 +1476,7 @@ textarea:focus-visible {
 }
 
 .pedidos-header h2 {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Oswald', sans-serif;
     font-weight: 700;
     font-size: clamp(2.5rem, 6vw, 4.2rem);
     text-transform: uppercase;
@@ -1503,25 +1511,57 @@ textarea:focus-visible {
     justify-content: center;
     aspect-ratio: 4 / 3;
     border: 1px solid var(--red);
-    color: var(--red);
     text-decoration: none;
     transition: background 0.3s, color 0.3s;
     font-family: 'DM Sans', sans-serif;
     font-weight: 500;
     font-size: 1.15rem;
     gap: 15px;
+    --hover-color: #ffcccc;
+    cursor: pointer;
 }
 
-.pedidos-card:hover {
-    background: var(--red);
-    color: #e8d0bd;
+.tarjeta {
+  padding: 20px;
+  border: 1px solid red;
+  background-color: #ffe5cc;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px;
 }
+
+/* Efecto 1: Zoom y rebote */
+.hover-zoom:hover {
+  transform: scale(1.1);
+  background-color: var(--color-hover-fondo);
+}
+
+/* Efecto 2: Inclinación sutil */
+.hover-rotate:hover {
+  transform: rotate(5deg);
+  background-color: var(--color-hover-fondo);
+}
+
+/* Efecto 3: Desplazamiento hacia arriba */
+.hover-lift:hover {
+  transform: translateY(-15px);
+  background-color: var(--color-hover-fondo);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+/* Cambio de color del texto */
+.tarjeta:hover h3 {
+  color: var(--color-hover-texto);
+}
+
 
 @media(max-width: 760px) {
     .pedidos-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 
 .reservation {
     background: var(--warm);
