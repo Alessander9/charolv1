@@ -1,6 +1,7 @@
 import { WA } from '../data/contact';
 import { Brand } from '../components/Brand';
 import { Icon } from '../components/Icon';
+import charolImage from '@file/charol.png';
 
 export function Footer({ navigate }) {
   return (
@@ -16,7 +17,6 @@ export function Footer({ navigate }) {
       <div className="footer-bottom">
         <div className="brand">
           <Brand />
-          <small>Karaoke Restobar</small>
         </div>
         <nav>
           <button onClick={() => { navigate('/'); window.scrollTo(0, 0); }} className="footer-link-btn">Home</button>

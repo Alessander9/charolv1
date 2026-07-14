@@ -65,7 +65,7 @@ export function Navbar({ navigate, page }) {
       <div className="scroll-progress" style={{ transform: `scaleX(${progress})` }} aria-hidden="true" />
       <header className={`navbar ${scrolled || page !== 'home' ? 'scrolled' : ''}`}>
         <a href="/" className="brand" onClick={(e) => { e.preventDefault(); if (page === 'home') { window.scrollTo({ top: 0, behavior: 'smooth' }); } else { navigate('/'); window.scrollTo(0, 0); } }} aria-label="Charol Karaoke Restobar, inicio">
-          <Brand /><small>Karaoke Restobar</small>
+          <Brand />
         </a>
         <nav id="main-navigation" className={`nav-links ${open ? 'open' : ''}`} aria-label="Navegaci\u00f3n principal">
           {navItems.map(([label, id]) => navLink(label, id))}
