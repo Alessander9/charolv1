@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
 import { categoryImages } from '../data/menu';
 import { WA } from '../data/contact';
 import { Button } from '../components/Button';

@@ -1,5 +1,6 @@
 import { Eyebrow } from '../components/Eyebrow';
 import { Button } from '../components/Button';
+import { Icon } from '../components/Icon';
 
 export function Location() {
   return (

@@ -1,7 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { WA } from '../data/contact';
 import { heroSlides } from '../data/home';
 import { Button } from '../components/Button';
+import { Eyebrow } from '../components/Eyebrow';
 import { Icon } from '../components/Icon';
 
 export function Hero({ navigate }) {
@@ -31,7 +33,7 @@ export function Hero({ navigate }) {
       <div className="hero-slides parallax">
         {heroSlides.map((item, index) => (
           <div className={`hero-slide ${index === active ? 'active' : ''}`} key={item.image} aria-hidden={index !== active}>
-            <img src={item.image} alt={index === active ? item.alt : ''} loading="eager" fetchPriority={index === 0 ? 'high' : 'auto'} decoding="async" />
+            <img src={item.image} alt={index === active ? item.alt : ''} loading="eager" fetchpriority={index === 0 ? 'high' : 'auto'} decoding="async" />
           </div>
         ))}
       </div>

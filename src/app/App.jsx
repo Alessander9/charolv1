@@ -1,8 +1,10 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { WA } from '../data/contact';
 import { useRouter } from '../hooks/useRouter';
 import { useCart } from '../hooks/useCart';
+import { Icon } from '../components/Icon';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../sections/Hero';
 import { Marquee } from '../sections/Marquee';

@@ -1,3 +1,4 @@
+import { WA } from '../data/contact';
 import { Brand } from '../components/Brand';
 import { Icon } from '../components/Icon';
 

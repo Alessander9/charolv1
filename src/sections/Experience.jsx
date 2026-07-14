@@ -1,5 +1,7 @@
 import { experiences } from '../data/home';
+import { WA } from '../data/contact';
 import { Eyebrow } from '../components/Eyebrow';
+import { Icon } from '../components/Icon';
 
 export function Experience() {
   return (

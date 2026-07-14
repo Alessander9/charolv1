@@ -1,6 +1,9 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { WA } from '../data/contact';
 import { cartaCategories } from '../data/menu';
 import { Eyebrow } from '../components/Eyebrow';
 import { Icon } from '../components/Icon';
+import { Footer } from '../sections/Footer';
 
 export function CartaPage({ navigate, cart }) {
   const [activeCat, setActiveCat] = useState(0);

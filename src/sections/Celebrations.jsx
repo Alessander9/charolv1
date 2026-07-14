@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import { Button } from '../components/Button';
+import { Eyebrow } from '../components/Eyebrow';
+import { Icon } from '../components/Icon';
 
 export function Celebrations() {
   const defaultImg = 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1500&q=88';

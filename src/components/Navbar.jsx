@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { WA } from '../data/contact';
 import { navItems } from '../data/navigation';
 import { Brand } from './Brand';
 import { Icon } from './Icon';
