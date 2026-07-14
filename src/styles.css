@@ -425,6 +425,10 @@ main {
     font-style: normal
 }
 
+.section-head h2 em {
+    padding-left: 55px;
+}
+
 .section-head>p:last-child {
     margin: 0;
     color: rgba(10, 9, 9, .6);
@@ -800,10 +804,34 @@ main {
 }
 
 .menu-cta a {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 14px;
-    font-weight: 700
+    padding: 10px 26px;
+    font-weight: 700;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color .4s ease
+}
+
+.menu-cta a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .4s ease
+}
+
+.menu-cta a:hover {
+    color: #000
+}
+
+.menu-cta a:hover::before {
+    transform: scaleX(1)
 }
 
 .gallery-section {
@@ -1427,7 +1455,7 @@ main {
 
 /* Interaction, accessibility and reservation refinements */
 html {
-    scroll-padding-top: 90px
+    scroll-padding-top: 72px
 }
 
 body.menu-open {
@@ -1527,7 +1555,6 @@ textarea:focus-visible {
   background-color: #ffe5cc;
   transition: all 0.4s ease;
   cursor: pointer;
-  display: inline-block;
   margin: 10px;
 }
 
@@ -1553,6 +1580,11 @@ textarea:focus-visible {
 /* Cambio de color del texto */
 .tarjeta:hover h3 {
   color: var(--color-hover-texto);
+}
+
+/* El SVG se vuelve blanco al hacer hover en cualquier tarjeta del grid */
+.pedidos-grid .pedidos-card:hover svg {
+  stroke: #fff;
 }
 
 
@@ -1908,9 +1940,7 @@ body::-webkit-scrollbar-thumb:hover {
     background: var(--gold)
 }
 
-section[id] {
-    scroll-margin-top: 88px
-}
+
 
 ::selection {
     background: var(--red);
@@ -1987,27 +2017,38 @@ section[id] {
     backdrop-filter: blur(12px)
 }
 
+.nav-link-btn,
 .nav-links a {
     position: relative;
     padding: 10px 15px;
     border: 0 !important;
     border-radius: 999px;
     color: rgba(255, 255, 255, .66);
-    transition: color .3s, background .3s, transform .3s
+    transition: color .3s, background .3s, transform .3s;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    font-weight: inherit;
+    text-transform: inherit
 }
 
+.nav-link-btn:hover,
 .nav-links a:hover {
     color: var(--warm);
     background: rgba(255, 255, 255, .07);
     transform: translateY(-1px)
 }
 
+.nav-link-btn.active,
 .nav-links a.active {
     color: var(--warm);
     background: rgba(215, 25, 32, .95);
     box-shadow: 0 8px 24px rgba(215, 25, 32, .25)
 }
 
+.nav-link-btn.active::before,
 .nav-links a.active::before {
     content: '';
     position: absolute;
@@ -2046,7 +2087,7 @@ section[id] {
 
 @media(max-width:760px) {
     html {
-        scroll-padding-top: 72px
+        scroll-padding-top: 68px
     }
 
     .navbar,
@@ -2071,13 +2112,17 @@ section[id] {
         backdrop-filter: blur(22px)
     }
 
+    .nav-link-btn,
     .nav-links a {
         width: min(320px, 100%);
         padding: 13px 20px;
         text-align: center;
-        color: rgba(255, 255, 255, .72)
+        color: rgba(255, 255, 255, .72);
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.4rem
     }
 
+    .nav-link-btn.active::before,
     .nav-links a.active::before {
         display: none
     }
@@ -2094,7 +2139,723 @@ section[id] {
 
     .navbar,
     .navbar .brand,
-    .nav-links a {
+    .nav-links a,
+    .nav-link-btn {
         transition: none
+    }
+}
+
+/* ─── FOOTER LINK BUTTONS ──────────────────────────── */
+.footer-link-btn {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    padding: 0;
+    text-transform: uppercase;
+    transition: opacity .3s
+}
+.footer-link-btn:hover {
+    opacity: .7
+}
+
+/* ─── CART ITEM CONTROLS (on CartaPage) ──────────── */
+.carta-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 12px
+}
+.carta-qty-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px
+}
+.carta-qty-btn {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: .25s;
+    color: var(--warm);
+    line-height: 1;
+    padding: 0
+}
+.carta-qty-btn:hover {
+    background: rgba(255,255,255,.1);
+    border-color: var(--gold);
+    color: var(--gold)
+}
+.carta-qty-num {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 700;
+    font-size: .95rem
+}
+.carta-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 18px;
+    border: 1px solid var(--red);
+    border-radius: 99px;
+    background: transparent;
+    cursor: pointer;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--red);
+    transition: .3s
+}
+.carta-add-btn:hover {
+    background: var(--red);
+    color: var(--warm);
+    box-shadow: 0 8px 24px rgba(215,25,32,.3)
+}
+.carta-item-whatsapp {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #25d366;
+    border: 1px solid rgba(37,211,102,.3);
+    transition: .3s;
+    flex: none;
+    margin-left: auto
+}
+.carta-item-whatsapp:hover {
+    background: #25d366;
+    color: #fff;
+    border-color: #25d366
+}
+
+/* ─── FLOATING CART WIDGET ────────────────────────── */
+.cart-float {
+    position: fixed;
+    z-index: 190;
+    right: 20px;
+    bottom: 82px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 18px 0 14px;
+    height: 52px;
+    border: 0;
+    border-radius: 99px;
+    background: var(--red);
+    color: #fff;
+    cursor: pointer;
+    font-size: .82rem;
+    font-weight: 700;
+    box-shadow: 0 12px 35px rgba(215,25,32,.45);
+    transition: .3s
+}
+.cart-float:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 16px 40px rgba(215,25,32,.55)
+}
+.cart-float-badge {
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    font-size: .72rem;
+    font-weight: 700
+}
+.cart-float-total {
+    color: var(--gold);
+    font-size: .85rem
+}
+
+/* ─── CART PAGE ────────────────────────────────────── */
+.cart-page {
+    background: var(--black);
+    min-height: 100vh
+}
+.cart-hero {
+    padding: 140px 0 60px;
+    position: relative;
+    overflow: hidden
+}
+.cart-hero .eyebrow {
+    color: var(--gold)
+}
+.cart-hero h1 {
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 600;
+    line-height: .88;
+    letter-spacing: -.05em;
+    text-transform: uppercase
+}
+.cart-hero h1 em {
+    color: var(--red);
+    font-style: normal
+}
+.cart-content {
+    padding: 0 0 100px
+}
+.cart-empty {
+    text-align: center;
+    padding: 80px 20px
+}
+.cart-empty p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,.5);
+    margin: 0 0 28px
+}
+
+/* Cart Items Table */
+.cart-items {
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+    overflow: hidden
+}
+.cart-items-header {
+    display: grid;
+    grid-template-columns: 1fr 120px 120px 44px;
+    gap: 16px;
+    padding: 16px 24px;
+    background: rgba(255,255,255,.04);
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.45)
+}
+.cart-row {
+    display: grid;
+    grid-template-columns: 1fr 120px 120px 44px;
+    gap: 16px;
+    padding: 20px 24px;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,.06);
+    transition: background .3s
+}
+.cart-row:hover {
+    background: rgba(255,255,255,.025)
+}
+.cart-row-info strong {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: .02em
+}
+.cart-row-info small {
+    display: block;
+    margin-top: 4px;
+    font-size: .7rem;
+    color: rgba(255,255,255,.4)
+}
+.cart-row-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center
+}
+.cart-row-qty span {
+    min-width: 20px;
+    text-align: center;
+    font-weight: 700
+}
+.cart-row-subtotal {
+    text-align: center;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: .95rem
+}
+.cart-row-remove {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    color: rgba(255,255,255,.3);
+    transition: .3s;
+    padding: 0
+}
+.cart-row-remove:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff
+}
+
+/* Cart Totals & Actions */
+.cart-total-section {
+    margin-top: 32px;
+    padding: 28px 24px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+    background: rgba(255,255,255,.025)
+}
+.cart-total-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem
+}
+.cart-total-line strong {
+    font-size: 1.5rem;
+    color: var(--gold)
+}
+.cart-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap
+}
+.cart-actions .button-outline {
+    color: var(--warm)
+}
+.cart-actions .button-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold)
+}
+.cart-clear-btn {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-size: .72rem;
+    color: rgba(255,255,255,.35);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: .3s;
+    padding: 0;
+    margin-left: auto
+}
+.cart-clear-btn:hover {
+    color: var(--red)
+}
+
+@media(max-width:760px) {
+    .cart-items-header {
+        display: none
+    }
+    .cart-row {
+        grid-template-columns: 1fr 100px;
+        gap: 12px;
+        padding: 18px 16px;
+        position: relative
+    }
+    .cart-row-info {
+        grid-column: 1;
+        grid-row: 1
+    }
+    .cart-row-qty {
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: flex-end
+    }
+    .cart-row-subtotal {
+        grid-column: 1;
+        grid-row: 2;
+        text-align: left;
+        font-size: 1.1rem
+    }
+    .cart-row-remove {
+        position: absolute;
+        top: 10px;
+        right: 10px
+    }
+    .cart-total-section {
+        padding: 20px 16px
+    }
+    .cart-actions {
+        flex-direction: column;
+        align-items: stretch
+    }
+    .cart-actions .button {
+        width: 100%;
+        justify-content: center
+    }
+    .cart-clear-btn {
+        margin: 0;
+        text-align: center
+    }
+    .cart-float {
+        right: 14px;
+        bottom: 76px;
+        height: 50px;
+        padding: 0 14px
+    }
+    .cart-float span:last-child {
+        display: none
+    }
+}
+
+/* ─── CARTA PAGE ───────────────────────────────────── */
+.carta-page {
+    background: var(--black);
+    min-height: 100vh
+}
+
+/* Hero */
+.carta-hero {
+    position: relative;
+    height: 80vh;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    overflow: hidden
+}
+.carta-hero-bg {
+    position: absolute;
+    inset: -15% 0;
+    z-index: 0
+}
+.carta-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+.carta-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(4,3,3,.94) 20%, rgba(4,3,3,.55) 70%, rgba(4,3,3,.25)),
+                linear-gradient(0deg, rgba(4,3,3,.6), transparent 50%)
+}
+.carta-hero-content {
+    position: relative;
+    z-index: 1
+}
+.carta-hero-text h1 {
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(4.5rem, 9vw, 9rem);
+    font-weight: 600;
+    line-height: .86;
+    letter-spacing: -.05em;
+    text-transform: uppercase
+}
+.carta-hero-text h1 em {
+    color: var(--red);
+    font-style: normal
+}
+.carta-hero-text > p {
+    max-width: 520px;
+    margin: 24px 0 32px;
+    color: rgba(255,255,255,.65);
+    font-size: 1.05rem;
+    line-height: 1.6
+}
+.carta-hero-actions {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap
+}
+
+/* Carta Layout — sidebar + content */
+.carta-layout {
+    display: flex;
+    gap: 0;
+    align-items: flex-start
+}
+
+/* Category Tabs — Left Sidebar */
+.carta-tabs-section {
+    position: sticky;
+    top: 72px;
+    z-index: 50;
+    flex: none;
+    width: 220px;
+    min-width: 220px;
+    padding: 40px 0 40px 28px;
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.15) transparent;
+    border-right: 1px solid rgba(255,255,255,.06);
+    background: rgba(10,9,9,.6);
+    min-height: 280px
+}
+.carta-tabs-section::-webkit-scrollbar {
+    width: 4px
+}
+.carta-tabs-section::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.15);
+    border-radius: 99px
+}
+.carta-tabs-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+.carta-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    padding: 12px 16px;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 10px;
+    background: transparent;
+    cursor: pointer;
+    transition: .3s;
+    text-align: left;
+    width: 100%
+}
+.carta-tab:hover {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.15)
+}
+.carta-tab.active {
+    background: var(--red);
+    border-color: var(--red);
+    box-shadow: 0 8px 24px rgba(215,25,32,.25)
+}
+.carta-tab-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.2
+}
+.carta-tab-tag {
+    font-size: .52rem;
+    opacity: .5;
+    text-transform: uppercase;
+    letter-spacing: .06em
+}
+.carta-tab.active .carta-tab-tag {
+    opacity: .7
+}
+
+/* Category Header */
+.carta-category-section {
+    padding: 70px 0 100px
+}
+.carta-category-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 60px
+}
+.carta-category-image {
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 1.4;
+    box-shadow: 0 20px 50px rgba(0,0,0,.5)
+}
+.carta-category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.16,1,.3,1)
+}
+.carta-category-image:hover img {
+    transform: scale(1.06)
+}
+.carta-category-info .eyebrow {
+    color: var(--gold)
+}
+.carta-category-info h2 {
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+    font-weight: 600;
+    line-height: .9;
+    letter-spacing: -.04em;
+    text-transform: uppercase
+}
+.carta-category-info > p {
+    margin: 20px 0 0;
+    color: rgba(255,255,255,.5);
+    line-height: 1.6;
+    max-width: 420px
+}
+
+/* Items Grid */
+.carta-items-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px
+}
+.carta-item-card {
+    padding: 28px 30px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    background: rgba(255,255,255,.025);
+    transition: .35s;
+    display: flex;
+    flex-direction: column
+}
+.carta-item-card:hover {
+    border-color: rgba(255,255,255,.18);
+    background: rgba(255,255,255,.05);
+    transform: translateY(-3px)
+}
+.carta-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px
+}
+.carta-item-header h3 {
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    letter-spacing: .02em
+}
+.carta-item-price {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap
+}
+.carta-item-desc {
+    margin: 0 0 16px;
+    color: rgba(255,255,255,.55);
+    font-size: .82rem;
+    line-height: 1.65
+}
+.carta-item-order {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 99px;
+    font-size: .72rem;
+    font-weight: 700;
+    color: #25d366;
+    align-self: flex-start;
+    transition: .3s;
+    margin-top: auto
+}
+.carta-item-order:hover {
+    background: #25d366;
+    color: #fff;
+    border-color: #25d366
+}
+
+/* Dots */
+.carta-dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+.carta-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.3);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: .3s
+}
+.carta-dot:hover {
+    border-color: var(--gold)
+}
+.carta-dot.active {
+    background: var(--red);
+    border-color: var(--red);
+    box-shadow: 0 0 12px rgba(215,25,32,.5)
+}
+
+/* Responsive Carta */
+@media(max-width:1000px) {
+    .carta-tabs-section {
+        width: 180px;
+        min-width: 180px;
+        padding: 30px 0 30px 16px
+    }
+}
+@media(max-width:900px) {
+    .carta-layout {
+        flex-direction: column
+    }
+    .carta-tabs-section {
+        position: sticky;
+        top: 72px;
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+        max-height: none;
+        overflow: visible;
+        background: rgba(10,9,9,.95);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        border-right: none;
+        min-height: auto
+    }
+    .carta-tabs-inner {
+        flex-direction: row;
+        gap: 4px;
+        overflow-x: auto;
+        padding: 12px 18px;
+        scrollbar-width: none
+    }
+    .carta-tabs-inner::-webkit-scrollbar {
+        display: none
+    }
+    .carta-tab {
+        flex: none;
+        padding: 8px 14px;
+        align-items: center;
+        text-align: center;
+        width: auto
+    }
+    .carta-tab-name {
+        font-size: .72rem
+    }
+    .carta-category-header {
+        grid-template-columns: 1fr;
+        gap: 30px
+    }
+    .carta-category-image {
+        aspect-ratio: 1.6
+    }
+    .carta-items-grid {
+        grid-template-columns: 1fr
+    }
+    .carta-dots {
+        display: none
+    }
+}
+@media(max-width:760px) {
+    .carta-hero {
+        height: 70vh;
+        min-height: 500px
+    }
+    .carta-tabs-section {
+        top: 68px
+    }
+    .carta-category-section {
+        padding: 40px 0 70px
+    }
+    .carta-item-card {
+        padding: 20px
+    }
+    .carta-item-header {
+        flex-direction: column;
+        gap: 4px
+    }
+    .carta-item-header h3 {
+        font-size: 1.15rem
     }
 }
