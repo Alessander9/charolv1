@@ -9,7 +9,7 @@ const navItems = [['Home', ''], ['Carta', 'carta'], ['Delivery', 'pedidos'], ['E
 // ─── HERO SLIDES ───────────────────────────────────────
 const heroSlides = [
   { kicker: 'Pollo a la brasa \u00b7 Parrillas', line: 'Fuego que', accent: 'se comparte.', copy: 'Pollo a la brasa, carnes y parrillas preparadas para reunir a todos alrededor de la mesa.', image: 'https://images.unsplash.com/photo-1712579733874-c3a79f0f9d12?auto=format&fit=crop&w=2200&q=90', alt: 'Pollo entero dor\u00e1ndose sobre una parrilla' },
-  { kicker: 'Karaoke \u00b7 M\u00fasica \u00b7 Diversi\u00f3n', line: 'Canta, brinda', accent: 'y vive la noche.', copy: 'Despu\u00e9s de la cena, toma el micr\u00f3fono y convierte la noche en una historia que tu grupo quiera repetir.', image: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=2200&q=90', alt: 'Cantante con micr\u00f3fono bajo luces de escenario' },
+  { kicker: 'Karaoke \u00b7 M\u00fasica \u00b7 Diversi\u00f3n', line: 'Canta, brinda', accent: 'y vive la noche.', copy: 'Despues de la cena, toma el micr\u00f3fono y convierte la noche en una historia que tu grupo quiera repetir.', image: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=2200&q=90', alt: 'Cantante con micr\u00f3fono bajo luces de escenario' },
   { kicker: 'Shows \u00b7 Tributos \u00b7 Artistas', line: 'El escenario', accent: 'se enciende.', copy: 'Noches tem\u00e1ticas, m\u00fasica en vivo y una agenda dise\u00f1ada para disfrutar sin bajar el volumen.', image: 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=2200&q=90', alt: 'Show musical en vivo con luces rojas' },
   { kicker: 'Cumplea\u00f1os \u00b7 Grupos \u00b7 Eventos', line: 'Celebra a', accent: 'tu manera.', copy: 'Re\u00fane a tu gente, comparte una buena cena y celebra con escenario, m\u00fasica y sabor en un solo lugar.', image: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=2200&q=90', alt: 'Grupo de amigos celebrando durante la noche' }
 ];
@@ -124,7 +124,7 @@ function Icon({ name, size = 20 }) {
   };
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{p[name]}</svg>;
 }
-function Brand() { return <span className="brand-word">CHAROL<span>\u25c6</span></span> }
+function Brand() { return <span className="brand-word">CHAROL<span></span></span> }
 function Eyebrow({ children, dark = false }) { return <p className={`eyebrow ${dark ? 'dark' : ''}`}><span />{children}</p> }
 function Button({ children, href = WA, kind = 'red' }) { return <a className={`button button-${kind}`} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">{children}<Icon name="arrow" /></a> }
 
@@ -357,7 +357,7 @@ function MenuSection({ navigate }) {
       <div className="wrap">
         <div className="section-head menu-head reveal">
           <Eyebrow>De la cocina a la canci\u00f3n</Eyebrow>
-          <h2>Cena primero.<br /><em>Canta despu\u00e9s.</em></h2>
+          <h2>Cena primero.<br /><em>Canta despues.</em></h2>
           <p>Categor\u00edas referenciales de la experiencia Charol. Consulta la carta completa con precios y descripciones.</p>
         </div>
         <div className="menu-carousel">
@@ -372,7 +372,7 @@ function MenuSection({ navigate }) {
           </div>
         </div>
         <div className="menu-cta reveal">
-          <button onClick={() => navigate('/carta')} style={{ background: 'none', cursor: 'pointer', font: 'inherit', color: 'inherit', display: 'flex', alignItems: 'center', gap: '14px', border: '0', padding: 0 }}>
+          <button className="menu-cta-btn" onClick={() => navigate('/carta')}>
             VER CARTA COMPLETA <Icon name="arrow" />
           </button>
         </div>
@@ -416,7 +416,7 @@ function Event() {
       <div className="wrap event-content reveal">
         <Eyebrow>Pr\u00f3ximamente</Eyebrow>
         <div className="event-title"><span className="event-date">Agenda<br />en preparaci\u00f3n</span></div>
-        <h2>La pr\u00f3xima<br /><em>noche es tuya.</em></h2>
+        <h2>La proxima<br /><em>noche es tuya.</em></h2>
         <p>Shows tributo, noches de rock, m\u00fasica criolla y artistas invitados. Conoce la pr\u00f3xima fecha en nuestras redes.</p>
         <Button kind="outline" href="https://www.instagram.com/charol_karaoke_restobar/">Ver m\u00e1s</Button>
       </div>
@@ -427,9 +427,9 @@ function Event() {
 function Celebrations() {
   const defaultImg = 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1500&q=88';
   const items = [
-    { label: 'Cumplea\u00f1os', text: 'Celebra tu d\u00eda con escenario propio, karaoke y la mejor comida. Armamos un ambiente que tu grupo va a recordar.', img: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1500&q=88' },
-    { label: 'Aniversarios', text: 'Una noche especial merece un lugar a la altura. Cena, m\u00fasica y un brindis que marque la fecha.', img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1500&q=88' },
-    { label: 'Reencuentros', text: 'Junta al grupo despu\u00e9s de mucho tiempo. Brasas, tragos y karaoke para ponerse al d\u00eda como se debe.', img: 'https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=1500&q=88' },
+    { label: 'Cumplea\u00f1os', text: 'Celebra tu dia con escenario propio, karaoke y la mejor comida. Armamos un ambiente que tu grupo va a recordar.', img: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1500&q=88' },
+    { label: 'Aniversarios', text: 'Una noche especial merece un lugar a la altura. Cena, musica y un brindis que marque la fecha.', img: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1500&q=88' },
+    { label: 'Reencuentros', text: 'Junta al grupo despues de mucho tiempo. Brasas, tragos y karaoke para ponerse al d\u00eda como se debe.', img: 'https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=1500&q=88' },
     { label: 'Eventos privados', text: 'Coordina con nuestro equipo para eventos corporativos, lanzamientos o reuniones que necesiten un toque distinto.', img: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1500&q=88' }
   ];
   const [openIndex, setOpenIndex] = useState(null);
@@ -444,7 +444,7 @@ function Celebrations() {
       <div className="celebrations-copy reveal">
         <Eyebrow dark>Celebra en Charol</Eyebrow>
         <h2>Tu grupo pone el motivo.<br /><em>Nosotros el escenario.</em></h2>
-        <p>Cu\u00e9ntanos qu\u00e9 est\u00e1s celebrando y armamos una experiencia para tu grupo.</p>
+        <p>Cuentanos que estas celebrando y armamos una experiencia para tu grupo.</p>
         <div className="occasion-list">
           {items.map((item, i) => (
             <button key={item.label} className={`occasion-item ${openIndex === i ? 'open' : ''}`} onClick={() => toggle(i)}>
@@ -459,7 +459,7 @@ function Celebrations() {
             </button>
           ))}
         </div>
-        <a className="button button-dark" href="#reserva">Cotizar celebraci\u00f3n <Icon name="arrow" /></a>
+        <a className="button button-dark" href="#reserva">Cotizar celebracion <Icon name="arrow" /></a>
       </div>
     </section>
   );
@@ -486,7 +486,7 @@ function Pedidos() {
         </div>
         <div className="pedidos-grid">
           <Tarjeta titulo="Web" efecto="hover-zoom" colorFondoHover="#d71920" colorTextoHover="white" icono="mouse" />
-          <Tarjeta titulo="Tel\u00e9fono" efecto="hover-rotate" colorFondoHover="#1877F2" colorTextoHover="white" />
+          <Tarjeta titulo="Telefono" efecto="hover-rotate" colorFondoHover="#1877F2" colorTextoHover="white" />
           <Tarjeta titulo="WhatsApp" efecto="hover-lift" colorFondoHover="#25D366" colorTextoHover="white" icono="whatsapp" />
           <Tarjeta titulo="Rappi" efecto="hover-rotate" colorFondoHover="#FF4940" colorTextoHover="white" icono="rappi" />
         </div>
@@ -501,22 +501,22 @@ function Location() {
       <div className="location-map">
         <div className="map-grid" />
         <span className="map-pin"><Icon name="pin" size={30} /></span>
-        <span className="map-road road-one">Av. Ant\u00fanez de Mayolo</span>
+        <span className="map-road road-one">Av. Antunez de Mayolo</span>
         <span className="map-road road-two">Los Olivos</span>
       </div>
       <div className="location-copy reveal">
-        <Eyebrow>Encu\u00e9ntranos</Eyebrow>
+        <Eyebrow>Encuentranos</Eyebrow>
         <h2>La noche empieza<br />en <em>Los Olivos.</em></h2>
         <div className="address">
           <Icon name="pin" />
           <div>
-            <small>Direcci\u00f3n reportada</small>
-            <strong>Av. Santiago Ant\u00fanez de Mayolo 1107<br />Los Olivos, Lima</strong>
+            <small>Dirección reportada</small>
+            <strong>Av. Santiago Antunez de Mayolo 1107<br />Los Olivos, Lima</strong>
             <span>Confirma el ingreso exacto al reservar.</span>
           </div>
         </div>
         <div className="location-actions">
-          <Button href="https://www.google.com/maps/search/?api=1&query=Av.+Santiago+Antunez+de+Mayolo+1107+Los+Olivos">C\u00f3mo llegar</Button>
+          <Button href="https://www.google.com/maps/search/?api=1&query=Av.+Santiago+Antunez+de+Mayolo+1107+Los+Olivos">Cómo llegar</Button>
           <a className="phone-link" href="tel:+51919736348"><Icon name="phone" /> 919 736 348</a>
         </div>
       </div>
@@ -531,7 +531,7 @@ function Reservation() {
     const msg = [
       'Hola Charol, quiero solicitar una reserva:',
       `Nombre: ${data.get('name')}`,
-      `Tel\u00e9fono: ${data.get('phone')}`,
+      `Telefono: ${data.get('phone')}`,
       `Fecha: ${data.get('date')}`,
       `Hora: ${data.get('time')}`,
       `Personas: ${data.get('people')}`,
@@ -550,17 +550,17 @@ function Reservation() {
           <div><strong>Contacto directo</strong><a href="tel:+51919736348"><Icon name="phone" />919 736 348</a></div>
         </div>
         <form className="reservation-form reveal" onSubmit={submit}>
-          <label>Nombre completo<input name="name" autoComplete="name" required placeholder="\u00bfC\u00f3mo te llamas?" /></label>
-          <label>Tel\u00e9fono<input name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="999 999 999" /></label>
+          <label>Nombre completo<input name="name" autoComplete="name" required placeholder="¿Cómo te llamas?" /></label>
+          <label>Telefono<input name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="999 999 999" /></label>
           <div className="form-row">
             <label>Fecha<input name="date" type="date" required /></label>
             <label>Hora<input name="time" type="time" required /></label>
           </div>
           <div className="form-row">
-            <label>N\u00famero de personas<input name="people" type="number" min="1" max="100" required placeholder="8" /></label>
+            <label>Numero de personas<input name="people" type="number" min="1" max="100" required placeholder="8" /></label>
             <label>Motivo<select name="occasion" required defaultValue=""><option value="" disabled>Seleccionar</option><option>Cumplea\u00f1os</option><option>Reuni\u00f3n de amigos</option><option>Aniversario</option><option>Evento corporativo</option><option>Otro</option></select></label>
           </div>
-          <label>Comentarios<textarea name="comments" rows="3" placeholder="Cu\u00e9ntanos qu\u00e9 necesitas" /></label>
+          <label>Comentarios<textarea name="comments" rows="3" placeholder="Cuentanos que necesitas" /></label>
           <label className="consent"><input type="checkbox" required />Acepto enviar estos datos por WhatsApp para gestionar mi solicitud.</label>
           <button className="button button-red" type="submit">Continuar en WhatsApp <Icon name="whatsapp" /></button>
         </form>
@@ -604,9 +604,25 @@ function Footer({ navigate }) {
 function CartaPage({ navigate, cart }) {
   const [activeCat, setActiveCat] = useState(0);
   const cartaRef = useRef(null);
+  const [pulseIds, setPulseIds] = useState({});
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  const cardClick = useCallback((itemId) => {
+    const ts = Date.now();
+    setPulseIds(prev => ({ ...prev, [itemId]: ts }));
+    setTimeout(() => {
+      setPulseIds(prev => {
+        if (prev[itemId] === ts) {
+          const next = { ...prev };
+          delete next[itemId];
+          return next;
+        }
+        return prev;
+      });
+    }, 500);
   }, []);
 
   const cat = cartaCategories[activeCat];
@@ -672,13 +688,33 @@ function CartaPage({ navigate, cart }) {
                 const ci = inCart(item.name, cat.name);
                 const itemId = `${item.name}-${cat.name}`;
                 return (
-                  <article className="carta-item-card reveal" key={item.name}>
+                  <div
+                    className={`carta-item-card reveal ${ci ? 'in-cart' : ''} ${pulseIds[itemId] ? 'carta-pulse' : ''}`}
+                    key={item.name}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => {
+                      if (ci) {
+                        cart.updateQuantity(itemId, 1);
+                      } else {
+                        cart.addItem(item, cat.name);
+                      }
+                      cardClick(itemId);
+                    }}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        e.currentTarget.click();
+                      }
+                    }}
+                  >
+                    {ci && <span className="carta-card-badge" key={`b-${itemId}-${ci.quantity}`}>{ci.quantity}</span>}
                     <div className="carta-item-header">
                       <h3>{item.name}</h3>
                       <span className="carta-item-price">{item.price}</span>
                     </div>
                     <p className="carta-item-desc">{item.desc}</p>
-                    <div className="carta-item-actions">
+                    <div className="carta-item-actions" onClick={e => e.stopPropagation()} onKeyDown={e => e.stopPropagation()}>
                       <div className="carta-qty-control">
                         {ci ? (
                           <>
@@ -692,11 +728,18 @@ function CartaPage({ navigate, cart }) {
                           </button>
                         )}
                       </div>
-                      <a className="carta-item-whatsapp" href={`${WA}?text=${encodeURIComponent(`Hola Charol, quiero pedir: ${item.name} (${cat.name}).`)}`} target="_blank" rel="noreferrer" title="Pedir directo por WhatsApp">
+                      <a
+                        className="carta-item-whatsapp"
+                        href={`${WA}?text=${encodeURIComponent(`Hola Charol, quiero pedir: ${item.name} (${cat.name}).`)}`}
+                        target="_blank" rel="noreferrer"
+                        title="Pedir directo por WhatsApp"
+                        onClick={e => e.stopPropagation()}
+                        onKeyDown={e => e.stopPropagation()}
+                      >
                         <Icon name="whatsapp" size={14} />
                       </a>
                     </div>
-                  </article>
+                  </div>
                 );
               })}
             </div>
@@ -727,9 +770,171 @@ function CartaPage({ navigate, cart }) {
   );
 }
 
+// ─── CATEGORY IMAGES (for cart thumbnails) ──────────────
+const categoryImages = {
+  'Pollo a la Brasa': 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=200&q=80',
+  'Parrillas': 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80',
+  'Piqueos': 'https://images.unsplash.com/photo-1541014741259-de529411b96a?auto=format&fit=crop&w=200&q=80',
+  'Ensaladas': 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=200&q=80',
+  'C\u00f3cteles & Jarras': 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=200&q=80',
+  'Bebidas': 'https://images.unsplash.com/photo-1544252890-c3e95e867389?auto=format&fit=crop&w=200&q=80',
+  'Postres': 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=200&q=80'
+};
+
+function getItemImage(category) {
+  return categoryImages[category] || 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=200&q=80';
+}
+
 // ─── CART PAGE ──────────────────────────────────────────
 function CartPage({ navigate, cart }) {
+  const [coupon, setCoupon] = useState('');
+  const [couponApplied, setCouponApplied] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [showMapModal, setShowMapModal] = useState(false);
+  const [mapSelectedAddress, setMapSelectedAddress] = useState('');
+  const [mapSearchQuery, setMapSearchQuery] = useState('');
+  const [mapSearchResults, setMapSearchResults] = useState([]);
+  const [searching, setSearching] = useState(false);
+  const mapRef = useRef(null);
+  const leafletMapRef = useRef(null);
+  const leafletMarkerRef = useRef(null);
+
   useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  // Modal open/close + keyboard + map lifecycle
+  useEffect(() => {
+    if (!showMapModal) {
+      // Clean up Leaflet when modal closes so it re-inits on next open
+      if (leafletMapRef.current) {
+        leafletMapRef.current.remove();
+        leafletMapRef.current = null;
+        leafletMarkerRef.current = null;
+      }
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+    const escHandler = e => e.key === 'Escape' && closeMapModal();
+    window.addEventListener('keydown', escHandler);
+
+    const timer = setTimeout(() => {
+      if (!mapRef.current) return;
+
+      // Fix Leaflet default icon paths
+      delete L.Icon.Default.prototype._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      });
+
+      const map = L.map(mapRef.current, {
+        center: [-11.9544, -77.0580], // Los Olivos, Lima
+        zoom: 14,
+        zoomControl: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19,
+      }).addTo(map);
+
+      map.on('click', async (e) => {
+        const { lat, lng } = e.latlng;
+
+        if (leafletMarkerRef.current) {
+          leafletMarkerRef.current.setLatLng([lat, lng]);
+        } else {
+          leafletMarkerRef.current = L.marker([lat, lng]).addTo(map);
+        }
+
+        try {
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1&accept-language=es`
+          );
+          const data = await res.json();
+          const addr = data.display_name || `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+          setMapSelectedAddress(addr);
+          setMapSearchQuery(addr);
+        } catch {
+          const fallback = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+          setMapSelectedAddress(fallback);
+          setMapSearchQuery(fallback);
+        }
+      });
+
+      leafletMapRef.current = map;
+      requestAnimationFrame(() => map.invalidateSize());
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', escHandler);
+    };
+  }, [showMapModal]);
+
+  const closeMapModal = useCallback(() => {
+    setShowMapModal(false);
+    setMapSelectedAddress('');
+    setMapSearchQuery('');
+    setMapSearchResults([]);
+  }, []);
+
+  // Search address via Nominatim
+  const handleMapSearch = useCallback(async (query) => {
+    if (!query.trim()) {
+      setMapSearchResults([]);
+      return;
+    }
+    setSearching(true);
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=5&accept-language=es&countrycodes=pe`
+      );
+      const data = await res.json();
+      setMapSearchResults(data);
+    } catch {
+      setMapSearchResults([]);
+    } finally {
+      setSearching(false);
+    }
+  }, []);
+
+  const searchDebounce = useRef(null);
+  const onSearchChange = useCallback((e) => {
+    const val = e.target.value;
+    setMapSearchQuery(val);
+    clearTimeout(searchDebounce.current);
+    searchDebounce.current = setTimeout(() => handleMapSearch(val), 400);
+  }, [handleMapSearch]);
+
+  const goToLocation = useCallback((lat, lon, displayName) => {
+    if (!leafletMapRef.current) return;
+    const map = leafletMapRef.current;
+    map.setView([lat, lon], 16);
+
+    if (leafletMarkerRef.current) {
+      leafletMarkerRef.current.setLatLng([lat, lon]);
+    } else {
+      leafletMarkerRef.current = L.marker([lat, lon]).addTo(map);
+    }
+
+    setMapSelectedAddress(displayName);
+    setMapSearchQuery(displayName);
+    setMapSearchResults([]);
+  }, []);
+
+  const confirmAddress = useCallback(() => {
+    if (mapSelectedAddress) {
+      setDeliveryAddress(mapSelectedAddress);
+      closeMapModal();
+    }
+  }, [mapSelectedAddress, closeMapModal]);
+
+  const discount = couponApplied ? cart.totalPrice * 0.1 : 0;
+  const finalTotal = cart.totalPrice - discount;
 
   const sendWhatsApp = () => {
     const lines = cart.items.map(i =>
@@ -739,80 +944,253 @@ function CartPage({ navigate, cart }) {
       'Hola Charol, quiero hacer un pedido:',
       ...lines,
       '',
-      `Total: S/ ${cart.totalPrice.toFixed(2)}`
+      ...(deliveryAddress ? [`Direcci\u00f3n de entrega: ${deliveryAddress}`] : []),
+      '',
+      `Subtotal: S/ ${cart.totalPrice.toFixed(2)}`,
+      ...(couponApplied ? [`Descuento (10%): -S/ ${discount.toFixed(2)}`] : []),
+      `Total: S/ ${finalTotal.toFixed(2)}`
     ].join('\n');
     window.open(`${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
     <div className="cart-page">
-      <section className="cart-hero">
-        <div className="wrap">
-          <Eyebrow>Tu Pedido</Eyebrow>
-          <h1>Carrito<br /><em>de compras.</em></h1>
-        </div>
-      </section>
 
-      <section className="cart-content">
-        <div className="wrap">
-          {cart.items.length === 0 ? (
-            <div className="cart-empty">
-              <p>No tienes productos en tu carrito.</p>
-              <button className="button button-red" onClick={() => navigate('/carta')}>
-                Ver carta <Icon name="arrow" />
+      <div className="cart-wrap">
+        <button className="cart-back" onClick={() => navigate('/')}>
+          <Icon name="arrow" size={16} /> Volver al Inicio
+        </button>
+
+        <h1 className="cart-title">Carrito de compras</h1>
+
+        {cart.items.length === 0 ? (
+          <div className="cart-empty">
+            <p>No tienes productos en tu carrito.</p>
+            <button className="cart-empty-btn" onClick={() => navigate('/carta')}>
+              Ver carta
+            </button>
+          </div>
+        ) : (
+          <div className="cart-layout">
+            {/* LEFT — Product list */}
+            <div className="cart-items">
+              {cart.items.map(item => (
+                <div className="cart-card" key={item.id}>
+                  <div className="cart-card-img">
+                    <img src={getItemImage(item.category)} alt={item.name} loading="lazy" />
+                  </div>
+                  <div className="cart-card-body">
+                    <div className="cart-card-top">
+                      <div className="cart-card-info">
+                        <h3>{item.name}</h3>
+                        <p className="cart-card-desc">{item.category} — desde {item.priceLabel}</p>
+                      </div>
+                      <span className="cart-card-price">S/ {(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                    <div className="cart-card-actions">
+                      <div className="cart-qty">
+                        <button className="cart-qty-btn" onClick={() => cart.updateQuantity(item.id, -1)} aria-label="Disminuir cantidad">−</button>
+                        <span className="cart-qty-num">{item.quantity}</span>
+                        <button className="cart-qty-btn" onClick={() => cart.updateQuantity(item.id, 1)} aria-label="Aumentar cantidad">+</button>
+                      </div>
+                      {editId === item.id ? (
+                        <span className="cart-edit-confirm">
+                          <button className="cart-edit-yes" onClick={() => { cart.removeItem(item.id); setEditId(null); }}>Eliminar</button>
+                          <button className="cart-edit-no" onClick={() => setEditId(null)}>Cancelar</button>
+                        </span>
+                      ) : (
+                        <button className="cart-edit-btn" onClick={() => setEditId(item.id)}>Editar</button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* RIGHT — Order summary panel */}
+            <aside className="cart-summary">
+              <div className="cart-summary-sticky">
+                <h2 className="cart-summary-title">Resumen del pedido</h2>
+
+                <div className="cart-summary-block">
+                  <h3 className="cart-summary-block-title">Direcci\u00f3n de entrega</h3>
+                  <button className="cart-address-picker" onClick={() => setShowMapModal(true)}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+                      <circle cx="12" cy="10" r="2.5" />
+                    </svg>
+                    <span>{deliveryAddress || 'Seleccionar direcci\u00f3n en el mapa'}</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="m9 18 6-6-6-6" />
+                    </svg>
+                  </button>
+                  {deliveryAddress && (
+                    <div className="cart-address-result">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 6 9 17l-5-5" />
+                      </svg>
+                      <span>{deliveryAddress}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="cart-summary-block">
+                  <div className="cart-summary-row">
+                    <span>Subtotal</span>
+                    <strong>S/ {cart.totalPrice.toFixed(2)}</strong>
+                  </div>
+                  {couponApplied && (
+                    <div className="cart-summary-row cart-summary-discount">
+                      <span>Descuento (10%)</span>
+                      <strong>-S/ {discount.toFixed(2)}</strong>
+                    </div>
+                  )}
+                </div>
+
+                <div className="cart-coupon">
+                  <div className="cart-coupon-input-wrap">
+                    <svg className="cart-coupon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 12v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z" />
+                      <path d="M16 6h2a2 2 0 0 1 2 2v2M4 10V8a2 2 0 0 1 2-2h2" />
+                    </svg>
+                    <input
+                      className="cart-coupon-input"
+                      type="text"
+                      placeholder="Codigo de cupon"
+                      value={coupon}
+                      onChange={e => setCoupon(e.target.value)}
+                      disabled={couponApplied}
+                    />
+                  </div>
+                  {couponApplied ? (
+                    <span className="cart-coupon-applied">Aplicado</span>
+                  ) : (
+                    <button
+                      className="cart-coupon-btn"
+                      onClick={() => coupon && setCouponApplied(true)}
+                      disabled={!coupon}
+                    >
+                      Aplicar
+                    </button>
+                  )}
+                </div>
+
+                <div className="cart-summary-total">
+                  <span>Total</span>
+                  <strong>S/ {finalTotal.toFixed(2)}</strong>
+                </div>
+
+                <button className="cart-continue-btn" onClick={sendWhatsApp}>
+                  <Icon name="whatsapp" size={18} /> Continuar Pedido
+                </button>
+              </div>
+            </aside>
+          </div>
+        )}
+      </div>
+      {/* MAP MODAL with Leaflet + Nominatim */}
+      {showMapModal && (
+        <div className="modal-overlay" onClick={closeMapModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Seleccionar direcci\u00f3n de entrega</h3>
+              <button className="modal-close" onClick={closeMapModal}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
               </button>
             </div>
-          ) : (
-            <>
-              <div className="cart-items">
-                <div className="cart-items-header">
-                  <span>Producto</span>
-                  <span>Cant.</span>
-                  <span>Subtotal</span>
-                  <span></span>
-                </div>
-                {cart.items.map(item => (
-                  <div className="cart-row" key={item.id}>
-                    <div className="cart-row-info">
-                      <strong>{item.name}</strong>
-                      <small>{item.category} \u2022 {item.priceLabel} c/u</small>
-                    </div>
-                    <div className="cart-row-qty">
-                      <button className="carta-qty-btn" onClick={() => cart.updateQuantity(item.id, -1)}>−</button>
-                      <span>{item.quantity}</span>
-                      <button className="carta-qty-btn" onClick={() => cart.updateQuantity(item.id, 1)}>+</button>
-                    </div>
-                    <span className="cart-row-subtotal">S/ {(item.price * item.quantity).toFixed(2)}</span>
-                    <button className="cart-row-remove" onClick={() => cart.removeItem(item.id)} aria-label="Eliminar producto">
-                      <Icon name="close" size={16} />
+
+            <div className="modal-map-container">
+              {/* Search input */}
+              <div className="modal-map-search-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input
+                  className="modal-map-search-input"
+                  type="text"
+                  placeholder="Buscar direcci\u00f3n..."
+                  value={mapSearchQuery}
+                  onChange={onSearchChange}
+                />
+                {searching && <span className="modal-map-searching" />}
+                {mapSearchQuery && !searching && (
+                  <button className="modal-map-clear" onClick={() => { setMapSearchQuery(''); setMapSearchResults([]); }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 6 6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+
+              {/* Search results dropdown */}
+              {mapSearchResults.length > 0 && (
+                <div className="modal-map-results">
+                  {mapSearchResults.map((r, i) => (
+                    <button
+                      className="modal-map-result-item"
+                      key={i}
+                      onClick={() => goToLocation(parseFloat(r.lat), parseFloat(r.lon), r.display_name)}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+                        <circle cx="12" cy="10" r="2.5" />
+                      </svg>
+                      <div className="modal-map-result-text">
+                        <strong>{r.display_name.split(',')[0]}</strong>
+                        <span>{r.display_name.split(',').slice(1).join(',')}</span>
+                      </div>
                     </button>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
 
-              <div className="cart-total-section">
-                <div className="cart-total-line">
-                  <span>Productos ({cart.totalItems})</span>
-                  <strong>S/ {cart.totalPrice.toFixed(2)}</strong>
-                </div>
-                <div className="cart-actions">
-                  <button className="button button-red" onClick={sendWhatsApp}>
-                    Enviar pedido <Icon name="whatsapp" />
-                  </button>
-                  <button className="button button-outline" onClick={() => navigate('/carta')}>
-                    Seguir agregando <Icon name="arrow" />
-                  </button>
-                  <button className="cart-clear-btn" onClick={cart.clearCart}>
-                    Vaciar carrito
-                  </button>
-                </div>
+              {/* Leaflet map */}
+              <div ref={mapRef} className="modal-map" />
+
+              {/* Selected address bar */}
+              <div className="modal-map-info">
+                {mapSelectedAddress ? (
+                  <>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                    <span className="modal-map-info-text">{mapSelectedAddress}</span>
+                  </>
+                ) : (
+                  <>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4" />
+                      <path d="M12 8h.01" />
+                    </svg>
+                    <span className="modal-map-info-hint">Haz clic en el mapa para seleccionar tu ubicaci\u00f3n</span>
+                  </>
+                )}
               </div>
-            </>
-          )}
+            </div>
+
+            {mapSelectedAddress && (
+              <div className="modal-confirm">
+                <button className="modal-confirm-btn" onClick={confirmAddress}>
+                  Confirmar direcci\u00f3n
+                </button>
+                <button className="modal-cancel-btn" onClick={closeMapModal}>
+                  Cancelar
+                </button>
+              </div>
+            )}
+
+            {!mapSelectedAddress && (
+              <button className="modal-cancel-btn" onClick={closeMapModal}>
+                Cancelar
+              </button>
+            )}
+          </div>
         </div>
-      </section>
-
-      <Footer navigate={navigate} />
+      )}
     </div>
   );
 }
