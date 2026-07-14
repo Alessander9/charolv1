@@ -16,7 +16,7 @@ export function Pedidos() {
         <div className="pedidos-header">
           <h2>Pide por<br />donde prefieras.</h2>
           <div className="pedidos-bird">
-            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Felix" alt="Mascota" loading="lazy" decoding="async" />
+            <img src="/charol-blanco-sin-fondo.png" alt="Charol" loading="lazy" decoding="async" />
           </div>
         </div>
         <div className="pedidos-grid">

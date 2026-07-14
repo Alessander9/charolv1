@@ -1,10 +1,11 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WA } from '../data/contact';
 import { useRouter } from '../hooks/useRouter';
 import { useCart } from '../hooks/useCart';
 import { Icon } from '../components/Icon';
+import { LoadingScreen } from '../components/LoadingScreen';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../sections/Hero';
 import { Marquee } from '../sections/Marquee';
@@ -25,6 +26,17 @@ export default function App() {
   const { page, navigate } = useRouter();
   const cart = useCart();
   const root = useRef(null);
+  const [loadingState, setLoadingState] = useState('visible');
+
+  useEffect(() => {
+    const leaveTimer = window.setTimeout(() => setLoadingState('leaving'), 1450);
+    const hideTimer = window.setTimeout(() => setLoadingState('hidden'), 1950);
+
+    return () => {
+      window.clearTimeout(leaveTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     if (page !== 'home') return;
@@ -55,21 +67,24 @@ export default function App() {
   }
 
   return (
-    <main ref={root}>
-      <Navbar navigate={navigate} page={page} />
-      <Hero navigate={navigate} />
-      <Marquee />
-      <MenuSection navigate={navigate} />
-      <Pedidos />
-      <Experience />
-      <Event />
-      <Celebrations />
-      <Location />
-      <Reservation />
-      <Footer navigate={navigate} />
-      <a className="whatsapp-float" href={WA} target="_blank" rel="noreferrer" aria-label="Reservar por WhatsApp">
-        <Icon name="whatsapp" size={25} /><span>Reserva aqu\u00ed</span>
-      </a>
-    </main>
+    <>
+      {loadingState !== 'hidden' && <LoadingScreen isLeaving={loadingState === 'leaving'} />}
+      <main ref={root}>
+        <Navbar navigate={navigate} page={page} />
+        <Hero navigate={navigate} />
+        <Marquee />
+        <MenuSection navigate={navigate} />
+        <Pedidos />
+        <Experience />
+        <Event />
+        <Celebrations />
+        <Location />
+        <Reservation />
+        <Footer navigate={navigate} />
+        <a className="whatsapp-float" href={WA} target="_blank" rel="noreferrer" aria-label="Reservar por WhatsApp">
+          <Icon name="whatsapp" size={25} /><span>Reserva aqu\u00ed</span>
+        </a>
+      </main>
+    </>
   );
 }
