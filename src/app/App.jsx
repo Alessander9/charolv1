@@ -48,6 +48,9 @@ export default function App() {
       gsap.to('.hero-content', { yPercent: 18, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
       gsap.utils.toArray('.parallax').forEach(el => gsap.to(el, { yPercent: 12, ease: 'none', scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
       gsap.utils.toArray('.reveal').forEach(el => gsap.from(el, { y: 70, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%', toggleActions: 'play none none reverse' } }));
+      gsap.from('.menu-cta', { y: 50, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.menu-section', start: 'top 92%', toggleActions: 'play none none reverse' } });
+      gsap.from('.event-content', { y: 50, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '#eventos', start: 'top 90%', toggleActions: 'play none none reverse' } });
+      gsap.from('.whatsapp-float', { opacity: 0, pointerEvents: 'none', duration: .5, ease: 'power2.out', scrollTrigger: { trigger: '#carta', start: 'top 90%', toggleActions: 'play none none reverse' } });
       gsap.to('.marquee-track', { xPercent: -50, duration: 24, repeat: -1, ease: 'none' });
       gsap.to('.menu-track', { xPercent: -50, duration: 45, repeat: -1, ease: 'none' });
       gsap.to('.round-stamp', { rotation: 360, duration: 18, repeat: -1, ease: 'none' });
@@ -60,7 +63,12 @@ export default function App() {
   }, [page]);
 
   if (page === 'carta') {
-    return <CartaPage navigate={navigate} cart={cart} />;
+    return (
+      <>
+        <Navbar navigate={navigate} page={page} />
+        <CartaPage navigate={navigate} cart={cart} />
+      </>
+    );
   }
   if (page === 'cart') {
     return <CartPage navigate={navigate} cart={cart} />;
@@ -72,7 +80,6 @@ export default function App() {
       <main ref={root}>
         <Navbar navigate={navigate} page={page} />
         <Hero navigate={navigate} />
-        <Marquee />
         <MenuSection navigate={navigate} />
         <Pedidos />
         <Experience />

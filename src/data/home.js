@@ -6,9 +6,9 @@ export const heroSlides = [
 ];
 
 export const experiences = [
-  ['01', 'Karaoke & sonido', 'Toma el escenario', 'Tu canci\u00f3n, las luces encendidas y toda la mesa haciendo coro. Aqu\u00ed nadie viene a mirar.', 'https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=1200&q=88'],
-  ['02', 'Brasas & piqueos', 'La previa empieza en la brasa', 'Pollos, parrillas y piqueos para compartir antes de que empiece el show.', 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=88'],
-  ['03', 'Shows & celebraciones', 'Celebra sin bajar el volumen', 'Cumplea\u00f1os, reencuentros y noches tem\u00e1ticas con la energ\u00eda que tu grupo merece.', 'https://images.unsplash.com/photo-1527529482837-469817dc6ce?auto=format&fit=crop&w=1200&q=88']
+  ['01', 'Karaoke & sonido', 'Toma el escenario', 'Tu canci\u00f3n, las luces encendidas y toda la mesa haciendo coro. Aqu\u00ed nadie viene a mirar.', 'https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=1200&q=88', 'Sube al escenario con tus amigos, elige tu canci\u00f3n favorita y siente la adrenalina de ser el show principal. Luces, micr\u00f3fono y una pista interminable de \u00e9xitos para que la noche sea inolvidable.'],
+  ['02', 'Brasas & piqueos', 'La previa empieza en la brasa', 'Pollos, parrillas y piqueos para compartir antes de que empiece el show.', 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=88', 'Disfruta de nuestra parrilla artesanal mientras compartes con tu grupo. Pollo a la brasa, cortes seleccionados y piqueos para abrir el apetito antes de que la noche se encienda con m\u00fasica y diversi\u00f3n.'],
+  ['03', 'Shows & celebraciones', 'Celebra sin bajar el volumen', 'Cumplea\u00f1os, reencuentros y noches tem\u00e1ticas con la energ\u00eda que tu grupo merece.', 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=88', 'Celebra tus momentos especiales con shows en vivo, m\u00fasica tem\u00e1tica y una atenci\u00f3n pensada para que tu grupo sea el protagonista de la noche. Cada evento es una experiencia \u00fanica.'],
 ];
 
 export const menu = [

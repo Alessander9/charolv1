@@ -6,7 +6,11 @@ import { Icon } from '../components/Icon';
 import { Footer } from '../sections/Footer';
 
 export function CartaPage({ navigate, cart }) {
-  const [activeCat, setActiveCat] = useState(0);
+  const [activeCat, setActiveCat] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('cat');
+    return cat ? Math.min(Math.max(parseInt(cat, 10), 0), cartaCategories.length - 1) : 0;
+  });
   const cartaRef = useRef(null);
   const [pulseIds, setPulseIds] = useState({});
 
@@ -38,26 +42,6 @@ export function CartaPage({ navigate, cart }) {
 
   return (
     <div className="carta-page" ref={cartaRef}>
-      {/* HERO */}
-      <section className="carta-hero">
-        <div className="carta-hero-bg">
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=90" alt="Ambiente del restaurante" />
-          <div className="carta-hero-overlay" />
-        </div>
-        <div className="wrap carta-hero-content">
-          <div className="carta-hero-text">
-            <Eyebrow>Nuestra Carta</Eyebrow>
-            <h1>Sabores que<br /><em>se cantan.</em></h1>
-            <p>Pollo a la brasa, parrillas, piqueos y c\u00f3cteles preparados para una noche inolvidable. Cada plato tiene su historia y su escenario.</p>
-            <div className="carta-hero-actions">
-              <a className="button button-red" href={`${WA}?text=Hola%20Charol,%20quiero%20hacer%20un%20pedido.`} target="_blank" rel="noreferrer">
-                Pedir por WhatsApp <Icon name="whatsapp" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <div className="carta-layout">
         <aside className="carta-tabs-section">
           <div className="carta-tabs-inner">
@@ -82,7 +66,7 @@ export function CartaPage({ navigate, cart }) {
               </div>
               <div className="carta-category-info">
                 <Eyebrow>{cat.tag}</Eyebrow>
-                <h2>{cat.name}</h2>
+                <h3>{cat.name}</h3>
                 <p>Selecciona tus platos y agrega al carrito. Luego env\u00edanos tu pedido por WhatsApp.</p>
               </div>
             </div>

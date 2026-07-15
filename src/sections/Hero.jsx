@@ -5,6 +5,7 @@ import { heroSlides } from '../data/home';
 import { Button } from '../components/Button';
 import { Eyebrow } from '../components/Eyebrow';
 import { Icon } from '../components/Icon';
+import { Marquee } from './Marquee';
 
 export function Hero({ navigate }) {
   const [active, setActive] = useState(0);
@@ -62,6 +63,7 @@ export function Hero({ navigate }) {
           </button>
         ))}
       </div>
+      <Marquee />
     </section>
   );
 }
