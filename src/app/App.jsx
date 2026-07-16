@@ -8,14 +8,11 @@ import { Icon } from '../components/Icon';
 import { LoadingScreen } from '../components/LoadingScreen';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../sections/Hero';
-import { Marquee } from '../sections/Marquee';
 import { MenuSection } from '../sections/MenuSection';
 import { Experience } from '../sections/Experience';
 import { Event } from '../sections/Event';
 import { Celebrations } from '../sections/Celebrations';
 import { Pedidos } from '../sections/Pedidos';
-import { Location } from '../sections/Location';
-import { Reservation } from '../sections/Reservation';
 import { Footer } from '../sections/Footer';
 import { CartaPage } from '../pages/CartaPage';
 import { CartPage } from '../pages/CartPage';
@@ -52,12 +49,23 @@ export default function App() {
       gsap.from('.event-content', { y: 50, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '#eventos', start: 'top 90%', toggleActions: 'play none none reverse' } });
       gsap.from('.whatsapp-float', { opacity: 0, pointerEvents: 'none', duration: .5, ease: 'power2.out', scrollTrigger: { trigger: '#carta', start: 'top 90%', toggleActions: 'play none none reverse' } });
       gsap.to('.marquee-track', { xPercent: -50, duration: 24, repeat: -1, ease: 'none' });
-      gsap.to('.menu-track', { xPercent: -50, duration: 45, repeat: -1, ease: 'none' });
-      gsap.to('.round-stamp', { rotation: 360, duration: 18, repeat: -1, ease: 'none' });
+      const roundStampST = ScrollTrigger.create({
+        trigger: '.celebrations',
+        start: 'top bottom',
+        endTrigger: '.footer',
+        end: 'top top',
+        scrub: 0.5,
+        onUpdate: self => {
+          gsap.set('.round-stamp', { y: self.progress * 150 });
+        }
+      });
       const images = gsap.utils.toArray('img');
       const refresh = () => ScrollTrigger.refresh();
       images.forEach(image => { if (!image.complete) image.addEventListener('load', refresh, { once: true }); });
-      return () => { images.forEach(image => image.removeEventListener('load', refresh)); };
+      return () => {
+        roundStampST.kill();
+        images.forEach(image => image.removeEventListener('load', refresh));
+      };
     }, root);
     return () => ctx.revert();
   }, [page]);
@@ -85,8 +93,6 @@ export default function App() {
         <Experience />
         <Event />
         <Celebrations />
-        <Location />
-        <Reservation />
         <Footer navigate={navigate} />
         <a className="whatsapp-float" href={WA} target="_blank" rel="noreferrer" aria-label="Reservar por WhatsApp">
           <Icon name="whatsapp" size={25} /><span>Reserva aqu\u00ed</span>

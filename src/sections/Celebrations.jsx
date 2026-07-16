@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Button } from '../components/Button';
 import { Eyebrow } from '../components/Eyebrow';
 import { Icon } from '../components/Icon';
 
@@ -11,9 +10,8 @@ export function Celebrations() {
     { label: 'Reencuentros', text: 'Junta al grupo despues de mucho tiempo. Brasas, tragos y karaoke para ponerse al d\u00eda como se debe.', img: 'https://images.unsplash.com/photo-1524650359799-842906ca1c06?auto=format&fit=crop&w=1500&q=88' },
     { label: 'Eventos privados', text: 'Coordina con nuestro equipo para eventos corporativos, lanzamientos o reuniones que necesiten un toque distinto.', img: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1500&q=88' }
   ];
-  const [openIndex, setOpenIndex] = useState(null);
-  const toggle = i => setOpenIndex(prev => prev === i ? null : i);
-  const activeImg = openIndex !== null ? items[openIndex].img : defaultImg;
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const activeImg = hoveredIndex !== null ? items[hoveredIndex].img : defaultImg;
   return (
     <section id="celebraciones" className="celebrations section">
       <div className="celebrations-media reveal">
@@ -26,19 +24,19 @@ export function Celebrations() {
         <p>Cuentanos que estas celebrando y armamos una experiencia para tu grupo.</p>
         <div className="occasion-list">
           {items.map((item, i) => (
-            <button key={item.label} className={`occasion-item ${openIndex === i ? 'open' : ''}`} onClick={() => toggle(i)}>
+            <button key={item.label} className={`occasion-item ${hoveredIndex === i ? 'open' : ''}`} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)} onClick={() => setHoveredIndex(i)}>
               <div className="occasion-header">
                 <span className="occasion-num">0{i + 1}</span>
                 <span className="occasion-label">{item.label}</span>
                 <Icon name="arrow" />
               </div>
-              {openIndex === i && (
+              {hoveredIndex === i && (
                 <div className="occasion-details"><p>{item.text}</p></div>
               )}
             </button>
           ))}
         </div>
-        <a className="button button-dark" href="#reserva">Cotizar celebracion <Icon name="arrow" /></a>
+        <a className="button button-dark" href="https://wa.me/51919736348?text=Hola%20Charol%2C%20quiero%20cotizar%20una%20celebraci%C3%B3n." target="_blank" rel="noreferrer">Cotizar celebracion <Icon name="arrow" /></a>
       </div>
     </section>
   );

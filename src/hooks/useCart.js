@@ -34,10 +34,8 @@ export function useCart() {
     }).filter(Boolean));
   }, []);
 
-  const clearCart = useCallback(() => setItems([]), []);
-
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
   const totalPrice = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
-  return { items, addItem, removeItem, updateQuantity, clearCart, totalItems, totalPrice };
+  return { items, addItem, removeItem, updateQuantity, totalItems, totalPrice };
 }

@@ -2,6 +2,7 @@ export function Icon({ name, size = 20 }) {
   const p = {
     arrow: <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
     'arrow-left': <><path d="M19 12H5" /><path d="m11 6-6 6 6 6" /></>,
+    'arrow-right': <><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></>,
     phone: <path d="M22 16.9v3a2 2 0 0 1-2.2 2 20 20 0 0 1-17.7-17.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.8 2.1Z" />,
     pin: <><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></>,
     instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><path d="M17.5 6.5h.01" /></>,
@@ -11,6 +12,7 @@ export function Icon({ name, size = 20 }) {
     info: <><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></>,
     check: <path d="M20 6 9 17l-5-5" />,
     close: <path d="M18 6 6 18M6 6l12 12" />,
+    pause: <><path d="M6 4h4v16H6z" /><path d="M14 4h4v16h-4z" /></>,
   };
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{p[name]}</svg>;
 }

@@ -131,7 +131,7 @@ export function Event() {
           <span className="event-dash">—</span>
           <span className="event-dash">—</span>
         </div>
-        <div className="event-subtitle">AGENDA EN PREPARACIÓN</div>
+        <div className="event-subtitle">AGENDA</div>
         <h2>LA PRÓXIMA <em>NOCHE ES TUYA.</em></h2>
         <p>Shows tributo, noches de rock, música criolla y artistas invitados. Conoce la próxima fecha en nuestras redes.</p>
 
