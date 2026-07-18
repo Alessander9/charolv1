@@ -191,7 +191,7 @@ export function CartaPage({ navigate, cart }) {
         </button>
       )}
 
-      <Footer navigate={navigate} />
+      <Footer />
       <a className="whatsapp-float" href={WA} target="_blank" rel="noreferrer" aria-label="Pedir por WhatsApp">
         <Icon name="whatsapp" size={25} /><span>Pide aquí</span>
       </a>

@@ -93,7 +93,7 @@ export default function App() {
         <Experience />
         <Event />
         <Celebrations />
-        <Footer navigate={navigate} />
+        <Footer />
         <a className="whatsapp-float" href={WA} target="_blank" rel="noreferrer" aria-label="Reservar por WhatsApp">
           <Icon name="whatsapp" size={25} /><span>Reserva aqu\u00ed</span>
         </a>

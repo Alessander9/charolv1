@@ -46,11 +46,23 @@ export function Navbar({ navigate, page }) {
       navigate('/');
       window.scrollTo(0, 0);
     } else {
-      if (page !== 'home') navigate('/');
-      setTimeout(() => {
+      if (page !== 'home') {
+        navigate('/');
+        // Poll with rAF until the target section exists in the DOM, then scroll.
+        // This works even after the Navbar unmounts because rAF is window-level.
+        const check = () => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            requestAnimationFrame(check);
+          }
+        };
+        requestAnimationFrame(check);
+      } else {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 50);
+      }
     }
   };
 
@@ -63,6 +75,7 @@ export function Navbar({ navigate, page }) {
   return (
     <>
       <div className="scroll-progress" style={{ transform: `scaleX(${progress})` }} aria-hidden="true" />
+      <div className={`nav-overlay ${open ? 'open' : ''}`} onClick={() => setOpen(false)} aria-hidden="true" />
       <header className={`navbar ${scrolled || page !== 'home' ? 'scrolled' : ''}`}>
         <a href="/" className="brand" onClick={(e) => { e.preventDefault(); if (page === 'home') { window.scrollTo({ top: 0, behavior: 'smooth' }); } else { navigate('/'); window.scrollTo(0, 0); } }} aria-label="Charol Karaoke Restobar, inicio">
           <Brand />

@@ -11,12 +11,13 @@ export function Celebrations() {
     { label: 'Eventos privados', text: 'Coordina con nuestro equipo para eventos corporativos, lanzamientos o reuniones que necesiten un toque distinto.', img: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1500&q=88' }
   ];
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [btnHover, setBtnHover] = useState(false);
   const activeImg = hoveredIndex !== null ? items[hoveredIndex].img : defaultImg;
   return (
     <section id="celebraciones" className="celebrations section">
       <div className="celebrations-media reveal">
         <img src={activeImg} alt="Imagen referencial de celebraci\u00f3n" loading="lazy" decoding="async" />
-        <span className="round-stamp">TU NOCHE \u00b7 TU ESCENARIO \u00b7</span>
+        <span className="round-stamp">Tu noche, tu escenario</span>
       </div>
       <div className="celebrations-copy reveal">
         <Eyebrow dark>Celebra en Charol</Eyebrow>
@@ -36,7 +37,7 @@ export function Celebrations() {
             </button>
           ))}
         </div>
-        <a className="button button-dark" href="https://wa.me/51919736348?text=Hola%20Charol%2C%20quiero%20cotizar%20una%20celebraci%C3%B3n." target="_blank" rel="noreferrer">Cotizar celebracion <Icon name="arrow" /></a>
+        <a className="button button-dark" href="https://wa.me/51919736348?text=Hola%20Charol%2C%20quiero%20cotizar%20una%20celebraci%C3%B3n." target="_blank" rel="noreferrer" onMouseEnter={() => setBtnHover(true)} onMouseLeave={() => setBtnHover(false)}>Cotizar celebracion <Icon name={btnHover ? 'whatsapp' : 'arrow'} /></a>
       </div>
     </section>
   );

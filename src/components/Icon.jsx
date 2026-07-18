@@ -13,6 +13,13 @@ export function Icon({ name, size = 20 }) {
     check: <path d="M20 6 9 17l-5-5" />,
     close: <path d="M18 6 6 18M6 6l12 12" />,
     pause: <><path d="M6 4h4v16H6z" /><path d="M14 4h4v16h-4z" /></>,
+    clock: <><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></>,
+    mic: <><rect x="9" y="2" width="6" height="11" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" /><path d="M12 17v5" /><path d="M9 22h6" /></>,
+    flame: <path d="M8.9 2c-.6 2.5-2 4.8-3.7 6.5A8.2 8.2 0 0 0 3 14a9 9 0 0 0 9 9 9 9 0 0 0 9-9 9.1 9.1 0 0 0-2.2-5.5A24 24 0 0 0 14 1.5c-.5.6-.9 1.2-1.2 1.8A6.5 6.5 0 0 1 8.9 2Z" />,
+    glass: <><path d="M8 2h8l2 12H6L8 2Z" /><path d="M6 14a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4" /><path d="M12 18v4" /></>,
+    users: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.9" /><path d="M16 3.1a4 4 0 0 1 0 7.8" /></>,
+    sparkle: <path d="M12 2l1.5 6.5L20 10l-6.5 1.5L12 18l-1.5-6.5L4 10l6.5-1.5L12 2Z" />,
+    utensils: <><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Z" /><path d="M21 22v-7" /></>,
   };
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{p[name]}</svg>;
 }

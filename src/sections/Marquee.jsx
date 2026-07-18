@@ -1,4 +1,6 @@
+import { Icon } from '../components/Icon';
+
 export function Marquee() {
-  const w = ['Karaoke', 'Brasas', 'Piqueos', 'Tragos', 'Shows', 'Celebraciones'];
-  return <div className="marquee" aria-label="Karaoke, brasas, piqueos, tragos, shows y celebraciones"><div className="marquee-track" aria-hidden="true">{[...w, ...w].map((x, i) => <span key={i}>{x}<b>\u2726</b></span>)}</div></div>;
+  const icons = ['mic', 'flame', 'utensils', 'glass', 'sparkle', 'users'];
+  return <div className="marquee" aria-label="Karaoke, brasas, piqueos, tragos, shows y celebraciones"><div className="marquee-track" aria-hidden="true">{[...icons, ...icons].map((icon, i) => <span key={i}><Icon name={icon} size={36} /><b>+</b></span>)}</div></div>;
 }

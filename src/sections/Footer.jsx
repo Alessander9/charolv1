@@ -1,16 +1,44 @@
 import { WA } from '../data/contact';
 import { Brand } from '../components/Brand';
 import { Icon } from '../components/Icon';
-export function Footer({ navigate }) {
+export function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-cta reveal">
-        <p>Tu pr\u00f3xima celebraci\u00f3n merece escenario.</p>
-        <h2>Reserva tu noche<br /><em>en Charol.</em></h2>
-        <a href={WA} target="_blank" rel="noreferrer" className="footer-circle">
-          <Icon name="whatsapp" size={22} />
-          <span>Reservar<br />ahora</span>
-        </a>
+      <div className="footer-services reveal">
+        <div className="footer-services-item">
+          <div className="footer-services-icon"><Icon name="mic" size={22} /></div>
+          <div>
+            <strong>Karaoke</strong>
+            <span>Escenario abierto todas las noches</span>
+          </div>
+        </div>
+        <div className="footer-services-item">
+          <div className="footer-services-icon"><Icon name="flame" size={22} /></div>
+          <div>
+            <strong>Brasas & Parrillas</strong>
+            <span>Cortes y parrillas para compartir</span>
+          </div>
+        </div>
+        <div className="footer-services-item">
+          <div className="footer-services-icon"><Icon name="glass" size={22} /></div>
+          <div>
+            <strong>Barra de Tragos</strong>
+            <span>C\u00f3cteles cl\u00e1sicos y creaciones propias</span>
+          </div>
+        </div>
+        <div className="footer-services-item">
+          <div className="footer-services-icon"><Icon name="users" size={22} /></div>
+          <div>
+            <strong>Eventos Privados</strong>
+            <span>Cumplea\u00f1os, reuniones y m\u00e1s</span>
+          </div>
+        </div>
+        <div className="footer-services-cta">
+          <a href={WA} target="_blank" rel="noreferrer" className="footer-circle">
+            <Icon name="whatsapp" size={22} />
+            <span>Reservar<br />ahora</span>
+          </a>
+        </div>
       </div>
       {/* ─── MAPA UBICACIÓN ──────────────────── */}
       <div className="footer-map reveal">
@@ -39,16 +67,17 @@ export function Footer({ navigate }) {
         <div className="brand">
           <Brand />
         </div>
-        <nav>
-          <button onClick={() => { navigate('/'); window.scrollTo(0, 0); }} className="footer-link-btn">Home</button>
-          <button onClick={() => navigate('/carta')} className="footer-link-btn">Carta</button>
-          <button onClick={() => { navigate('/'); setTimeout(() => document.getElementById('celebraciones')?.scrollIntoView({ behavior: 'smooth' }), 50); }} className="footer-link-btn">Celebraciones</button>
-        </nav>
+        <div className="footer-desc">
+          <p>Karaoke, brasas y tragos en Los Olivos. Tu noche, tu escenario.</p>
+        </div>
         <div className="social">
           <a href="https://www.instagram.com/charol_karaoke_restobar/" target="_blank" rel="noreferrer"><Icon name="instagram" /> Instagram</a>
           <a href="tel:+51919736348"><Icon name="phone" /> 919 736 348</a>
         </div>
-        <small>&copy; 2026 CHAROL \u00b7 LOS OLIVOS</small>
+        <div className="footer-hours">
+          <span><Icon name="clock" /> Lun — Sab: 6pm — 2am</span>
+        </div>
+        <small>&copy; 2026 CHAROL \u00b7 LOS OLIVOS \u00b7 KARAOKE RESTOBAR</small>
       </div>
     </footer>
   );
